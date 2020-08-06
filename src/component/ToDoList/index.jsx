@@ -1,21 +1,14 @@
 import React from "react";
-import ToDoItem from "../ToDoItem";
-import ToDoInput from "../ToDoInput"
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import ToDoItem from "../ToDoItem";
 
 class ToDoList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
     render() {
-        console.log(this.props.items);
-        return ( 
+        return (
             <div>
                 {
-                    this.props.items.map((item, index) => <ToDoItem
-                    value={item} index={index} key={index} />)
+                    this.props.items.map(item => <ToDoItem item={item} key={item.id}/>)
                 }
             </div>
         )
@@ -24,8 +17,16 @@ class ToDoList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        items: state.toDoItems
+        items: state.todoItems
     }
 }
 
-export default connect(mapStateToProps)(ToDoList);
+ToDoList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        value: PropTypes.string.isRequired,
+        mark: PropTypes.bool.isRequired
+    }).isRequired).isRequired
+}
+
+export default connect(mapStateToProps) (ToDoList)
