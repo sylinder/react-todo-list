@@ -31,7 +31,8 @@ ToDoItem.propTypes = {
         mark: PropTypes.bool.isRequired
     }).isRequired,
 
-    deleteItem: PropTypes.func.isRequired
+    deleteItem: PropTypes.func.isRequired,
+    updateItem: PropTypes.func.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(ToDoItem);
