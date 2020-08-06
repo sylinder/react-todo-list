@@ -1,4 +1,4 @@
-import {ADD_ITEM, DELETE_ITEM} from "../actions"
+import {ADD_ITEM, DELETE_ITEM, UPDATE_ITEM} from "../actions"
 
 const initState = {
     todoItems: [],
@@ -18,6 +18,13 @@ export default (state = initState, action) => {
             return {
                 ...state,
                 todoItems: state.todoItems.filter((ToDoItem) => ToDoItem.id != action.payload.index)
+            }
+        }
+
+        case UPDATE_ITEM: {
+            return {
+                ...state,
+                todoItems: state.todoItems.map(item => item.id === action.payload.index ? {...item, mark: !item.mark}: item)
             }
         }
 
